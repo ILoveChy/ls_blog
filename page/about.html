@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>喵怼怼的个人博客</title>
+    <link rel="stylesheet" href="./css/init.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/about.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="zw">
+        <div class="title">怼喵喵的博客</div>
+        <div class="subtitle">做一个佛系的技术男，发际线就是底线</div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <ul class="menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/sitemap.html">地图</a></li>
+                <li><a href="/about.html">关于</a></li>
+                <li><a href="/guestbook.html">留言</a></li>
+            </ul>
+            <div class="serach_bar">
+                <input type="text" placeholder="输入关键词查找">
+                <a class="serach_baricon" href="####">
+                    <svg t="1565272574828" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="1203" width="20" height="20">
+                        <path
+                            d="M685.14927 741.717814C616.194448 798.145389 528.050806 832 432 832 211.0861 832 32 652.913901 32 432 32 211.0861 211.0861 32 432 32 652.913901 32 832 211.0861 832 432 832 528.050806 798.145389 616.194448 741.717814 685.14927L979.157526 922.588986C994.734694 938.16615 994.80809 963.348333 979.078211 979.078211 963.457238 994.699181 938.154406 994.722947 922.588986 979.157526L685.14927 741.717814ZM432.000016 755.200029C610.498454 755.200029 755.200029 610.498454 755.200029 432.000016 755.200029 253.501577 610.498454 108.800003 432.000016 108.800003 253.501577 108.800003 108.800003 253.501577 108.800003 432.000016 108.800003 610.498454 253.501577 755.200029 432.000016 755.200029L432.000016 755.200029 432.000016 755.200029Z"
+                            p-id="1204" fill="#4e4171"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="contentLeft">
+            <div class="description">
+                <div class="about_title">关于我</div>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+
+                <div class="about_title">关于博客</div>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+                <p>dsadasdasdasda</p>
+            </div>
+            <div class="blog_comments">
+                <span class="blog_comments_msg">关于:目前有61条留言</span>
+                <div class="blog_comment">
+                    <span>
+                        <b>ls555555</b>:发表于 XXXXXXXXXXXXX<a>[回复]</a>
+                    </span>
+                    <div>
+                        asdsadasjdahskjdhasjdhasjkdhaskjdhaskjdsa
+                    </div>
+                </div>
+                <div class="blog_comment">
+                    <span>
+                        <b>ls555555</b>:发表于 XXXXXXXXXXXXX<a>[回复]</a>
+                    </span>
+                    <div>
+                        asdsadasjdahskjdhasjdhasjkdhaskjdhaskjdsa
+                    </div>
+                </div>
+                <div class="blog_comment">
+                    <span>
+                        <b>ls555555</b>:发表于 XXXXXXXXXXXXX<a>[回复]</a>
+                    </span>
+                    <div>
+                        asdsadasjdahskjdhasjdhasjkdhaskjdhaskjdsa
+                    </div>
+                </div>
+                <div class="blog_comment">
+                    <span>
+                        <b>ls555555</b>:发表于 XXXXXXXXXXXXX<a>[回复]</a>
+                    </span>
+                    <div>
+                        asdsadasjdahskjdhasjdhasjkdhaskjdhaskjdsa
+                    </div>
+                </div>
+                <div class="blog_comment">
+                    <span>
+                        <b>ls555555</b>:发表于 XXXXXXXXXXXXX<a>[回复]</a>
+                    </span>
+                    <div>
+                        asdsadasjdahskjdhasjdhasjkdhaskjdhaskjdsa
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contentRight">
+            <div id="random_tags" class="right_module">
+                <div>随机标签云</div>
+                <a href="/" v-for="tag in tags" :style="{color:randomColor(),fontSize:randomSize()}">
+                    {{tag}}
+                </a>
+            </div>
+            <div id="new_hot" class="right_module">
+                <div>最近热门</div>
+                <ul>
+                    <li v-for="titleItem in titleList"><a :href="titleItem.link">{{titleItem.title}}</a></li>
+                </ul>
+            </div>
+            <div id="newComments" class="right_module">
+                <div>最新评论</div>
+                <ul>
+                    <li v-for="commentItem in commentList">
+                        <div>
+                            <span>{{commentItem.username}}</span>
+                            <span class="pull_right">{{commentItem.date}}</span>
+                        </div>
+                        <p>{{commentItem.comment}}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="right_module ">
+                <div>友情链接</div>
+                <div class="friendLink"><a href="https://github.com/ILoveChy">婉月歌GitHub</a></div>
+                <div class="friendLink"><a href="https://github.com/ILoveChy">婉月歌GitHub</a></div>
+                <div class="friendLink"><a href="https://github.com/ILoveChy">婉月歌GitHub</a></div>
+                <div class="friendLink"><a href="https://github.com/ILoveChy">婉月歌GitHub</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <ul>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+            <li>Vue</li>
+        </ul>
+        <li>© 2019 <span">GitHub</span>, Inc.</li>
+    </footer>
+    <script src="./js/base.js"></script>
+
+</body>
+
+</html>

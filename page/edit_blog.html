@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑博客</title>
+</head>
+
+<body>
+    <style type="text/css">
+        .body {
+            width: 800px;
+            margin: 0 auto 0 auto;
+        }
+    </style>
+    <div class="body">
+        <h1>文章编辑</h1>
+        <input id="edit_title" type="text" placeholder="请输入标题">
+        <input id="edit_tags" type="text" placeholder="请输入标签,用逗号隔开">
+        <hr>
+        <div id="edit"></div>
+        <button onclick="submit()">提交</button>
+    </div>
+
+    <!-- 引用js -->
+    <script type="text/javascript" src="./until/wangeditor/wangEditor.js"></script>
+    <script type="text/javascript">
+        var E = window.wangEditor
+        var editor = new E('#edit')
+        editor.create()
+        function submit() {
+            var content = editor.txt.html()
+            var title = document.querySelector('#edit_title').value;
+            var tags = document.querySelector('#edit_tags').value;
+
+        }
+    </script>
+</body>
+
+</html>

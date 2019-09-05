@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑每日一句</title>
+</head>
+
+<body>
+    <style type="text/css">
+        .body {
+            width: 800px;
+            margin: 0 auto 0 auto;
+        }
+    </style>
+    <div class="body">
+        <h1>每日一句编辑</h1>
+        <div id="edit"></div>
+        <button onclick="submit()">提交</button>
+    </div>
+
+    <!-- 引用js -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="./until/wangeditor/wangEditor.js"></script>
+    <script type="text/javascript">
+        var E = window.wangEditor
+        var editor = new E('#edit')
+        editor.create()
+        function submit() {
+            var content = editor.txt.html();
+            axios({
+                method: 'post',
+                url: '/editEveryDay',
+                data: content
+            }).then(res => {
+                alert(res.data.msg);
+                editor.txt.html("")
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+    </script>
+</body>
+
+</html>
