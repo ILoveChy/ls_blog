@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/home.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./until/axios/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
@@ -80,14 +80,22 @@
                     </div>
                     <div class="article_foot">发布于{{article.date}} | 浏览({{article.visit}}) | Tags：{{article.tags}}</div>
                 </div>
+                <div class="page_tool">
+                    <ul>
+                        <li v-for="pageNum in pageNumList" @click="jumpTo(pageNum.page)"
+                            :class="{now_page:(pageNum.text==page)}">
+                            {{pageNum.text}}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="contentRight">
 
             <div id="random_tags" class="right_module">
                 <div>随机标签云</div>
-                <a href="/" v-for="tag in tags" :style="{color:randomColor(),fontSize:randomSize()}">
-                    {{tag}}
+                <a :href="tag.link" v-for="tag in tags" :style="{color:randomColor(),fontSize:randomSize()}">
+                    {{tag.text }}
                 </a>
             </div>
             <div id="new_hot" class="right_module">

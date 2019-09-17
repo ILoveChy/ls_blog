@@ -93,6 +93,39 @@
     padding: 0 5px;
 }
 
+
+
+.page_tool {
+    margin-top: 20px;
+    color: #eeeeee;
+    margin: 20 auto;
+}
+
+.page_tool>ul {
+    text-align: center;
+}
+
+.page_tool>ul>li {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    color: #191818;
+    line-height: 30px;
+    background: white;
+    text-align: center;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.page_tool>ul>li:hover {
+    background: gray;
+}
+
+.now_page {
+    background: #333333 !important;
+    color: #eeeeee;
+}
+
 .content {
     display: flex;
     position: relative;

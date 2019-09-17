@@ -25,6 +25,7 @@
     </div>
 
     <!-- 引用js -->
+    <script src="./until/axios/axios.min.js"></script>
     <script type="text/javascript" src="./until/wangeditor/wangEditor.js"></script>
     <script type="text/javascript">
         var E = window.wangEditor
@@ -34,7 +35,16 @@
             var content = editor.txt.html()
             var title = document.querySelector('#edit_title').value;
             var tags = document.querySelector('#edit_tags').value;
-
+            axios({
+                method: 'post',
+                url: '/editBlog?title=' + title + "&tags=" + tags,
+                data: content
+            }).then(res => {
+                alert(res.data.msg);
+                editor.txt.html("")
+            }).catch(err => {
+                console.log(err);
+            });
         }
     </script>
 </body>
