@@ -5,9 +5,7 @@
                     <div class="article_img"></div>
                     <div class="article_msg">
                         <p class="article_title">
-                            <a :href="article.link">
-                                {{article.title}}
-                            </a>
+                            <router-link :to="{path:'blog/'+article.id}">{{article.title}}</router-link>
                         </p>
                         <p class="article_content">
                             {{article.content}}
@@ -19,6 +17,7 @@
 </template>
 
 <script>
+import fromNow from '@/util/fromNow.js'
 import axios from 'axios'
 export default {
     data(){
@@ -31,41 +30,17 @@ export default {
       }
     },
     methods: {
-        fromNow: date => {
-            var dur = new Date - new Date(date * 1000);
-            return (
-                dur < 10 * 1000 && '刚刚' ||
-                dur < 60 * 1000 && '不到一分钟' ||
-                dur < 30 * 60 * 1000 && '半小时前' ||
-                dur < 60 * 60 * 1000 && '一小时前' ||
-                dur < 12 * 60 * 60 * 1000 && '半天之内' ||
-                dur < 24 * 60 * 60 * 1000 && '一天之内' ||
-                dur < 3 * 12 * 60 * 60 * 1000 && '三天之内' ||
-                dur < 7 * 12 * 60 * 60 * 1000 && '一周之内' ||
-                dur < 30 * 12 * 60 * 60 * 1000 && '一个月之内' ||
-                dur < 6 * 30 * 12 * 60 * 60 * 1000 && '半年之内' ||
-                dur < 12 * 30 * 12 * 60 * 60 * 1000 && '快一年了' || '很久远了'
-            )
-        },
         setThisPageNumList:(result)=>{
-            this.pageNumList.push(...result)           
+            this.pageNumList.push(...result)                 
         }
     },
     computed: {
         getPage() {
             return (page, pageSize) => {
-                var searchUrlParams = location.search.indexOf("?") > -1 ? location.search.split("?")[1].split("&") : "";
-                var tag = "";
-                for (let i = 0; i < searchUrlParams.length; i++) {
-                    if (searchUrlParams[i].split("=")[0] == "tag") {
-                        try {
-                            tag = searchUrlParams[i].split("=")[1];
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    }
-                }
-                if (tag == "") { //非查询
+                console.log(this.$route.query.tag);
+                console.log(this.page);
+                
+                if (this.$route.query.tag == undefined) { //非查询
                     axios({
                         method: "get",
                         url: "/queryBlogByPage?page=" + (page - 1) + "&pageSize=" + pageSize
@@ -77,13 +52,12 @@ export default {
                               
                                 var temp = {};
                                 temp['title'] = result[key].title;
-                                
                                 temp['tags'] = result[key].tags;
                                 temp['id'] = result[key].id;
                                 temp['visit'] = result[key].views;
                                 temp['content'] = result[key].content;
-                                temp['date'] = this.fromNow(result[key].ctime);
-                                temp['link'] = "/blog_detail.html?bid=" + result[key].id;
+                                temp['date'] = fromNow(result[key].ctime);
+                                temp['link'] = "/blog/"+result[key].id;
                                 list.push(temp);
                             }
                         }
@@ -95,7 +69,7 @@ export default {
                     axios({
                         method: "get",
                         url: "/queryBlogCount"
-                    }).then(res => {
+                    }).then(res => {                        
                         this.count = res.data.data[0].count;
                     }).catch(err => {
                         console.log(err);
@@ -103,23 +77,24 @@ export default {
                 } else {
                     axios({
                         method: "get",
-                        url: "/queryByTag?page=" + (page - 1) + "&pageSize=" + pageSize + "&tag=" + tag
+                        url: "/queryByTag?page=" + (page - 1) + "&pageSize=" + pageSize + "&tag=" + this.$route.query.tag
                     }).then(res => {
+                      
+                      
+                        console.log(res);
                         var result = res.data.data;
                         var list = [];
                         for (const key in result) {
-                            if (!Object.prototype.hasOwnProperty.call(result, "key")) {
-                                var temp = {};
-                                temp.title = result[key].title;
-                                temp.tags = result[key].tags;
-                                temp.id = result[key].id;
-                                temp.visit = result[key].views;
-                                temp.content = result[key].content;
-                                temp.date = this.fromNow(result[key].ctime);
-                                temp.link = "/blog_detail.html?bid=" + result[key].id;
-                                list.push(temp);
-                            }
-                        }
+                          var temp = {};
+                          temp.title = result[key].title;
+                          temp.tags = result[key].tags;
+                          temp.id = result[key].id;
+                          temp.visit = result[key].views;
+                          temp.content = result[key].content;
+                          temp.date = fromNow(result[key].ctime);
+                          temp.link = "/blog/" + result[key].id;
+                          list.push(temp);
+                        }                        
                         this.articleList = list;
                         this.page = page;
                     }).catch(err => {
@@ -128,7 +103,7 @@ export default {
 
                     axios({
                         method: "get",
-                        url: "/queryByTagCount?tag=" + tag
+                        url: "/queryByTagCount?tag=" + this.$route.query.tag
                     }).then(res => {
                         this.count = res.data.data[0].count;
                     }).catch(err => {

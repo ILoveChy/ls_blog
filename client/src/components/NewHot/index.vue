@@ -3,7 +3,7 @@
         <div>最近热门</div>
         <ul>
             <li :key="titleItem.link" v-for="titleItem in titleList">
-              <a  :href="titleItem.link">{{titleItem.title}}</a>
+              <router-link :to="{path:titleItem.path}">{{titleItem.title}}</router-link>
             </li>
         </ul>
     </div>
@@ -26,7 +26,8 @@ export default {
             for (let i = 0; i < res.data.data.length; i++) {
                 var temp = {};
                 temp.title = res.data.data[i].title;
-                temp.link = '/blog_detail.html?bid=' + res.data.data[i].id;
+                temp.id = res.data.data[i].id;
+                temp.path=`/blog/${temp.id}`
                 result.push(temp);
             }
             this.titleList = result;

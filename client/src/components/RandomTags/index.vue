@@ -1,9 +1,14 @@
 <template>
     <div id="random_tags" class="right_module">
         <div>随机标签云</div>
-        <a :href="tag.link" :key="tag.link" v-for="tag in tags" :style="{color:randomColor(),fontSize:randomSize()}">
+        <router-link
+          :to="{path:tag.link}"
+          :key="tag.link" 
+          v-for="tag in tags" 
+          :style="{color:randomColor(),fontSize:randomSize()}"
+        >
             {{tag.text }}
-        </a>
+        </router-link>
     </div>
 </template>
 

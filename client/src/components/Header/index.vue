@@ -4,7 +4,7 @@
             <ul class="menu">
                 <li><router-link to="/">首页</router-link></li>
                 <li><router-link to="/sitemap">地图</router-link></li>
-                <li><router-link to="/aboutpage">关于</router-link></li>
+                <li><router-link to="/about">关于</router-link></li>
                 <li><router-link to="/guestbook">留言</router-link></li>
             </ul>
             <div class="serach_bar">

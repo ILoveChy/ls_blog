@@ -21,6 +21,7 @@
 <script>
 import axios from 'axios'
 export default {
+    props:['bid'],
     data(){
       return{
         vcode: "",
@@ -41,7 +42,20 @@ export default {
         },
         sendComment() {
             return () => {
-                var bid = -1;
+                var searchUrlParams = location.search.indexOf("?") > -1 ? location.search.split("?")[1].split("&") : "";
+                if (searchUrlParams == "") {
+                    return;
+                }
+                var bid = this.bid
+                for (let i = 0; i < searchUrlParams.length; i++) {
+                    if (searchUrlParams[i].split("=")[0] == "bid") {
+                        try {
+                            bid = parseInt(searchUrlParams[i].split("=")[1])
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+                }
                 var reply = document.getElementById("comment_reply").value;
                 var name = document.getElementById("comment_name").value;
                 var email = document.getElementById("comment_email").value;

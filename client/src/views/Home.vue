@@ -6,7 +6,7 @@
     </div>
     <Header />
     <div class="content">
-      <router-view />
+      <router-view :key='key' />
       <div class="contentRight">
         <RandomTags />
         <NewHot />
@@ -34,6 +34,11 @@ export default {
     RandomTags,
     NewHot,
     NewComments
+  },
+  computed:{
+    key(){
+      return this.$route.name?this.route.name+ +new Date():this.$route+ +new Date()
+    }
   }
 }
 </script>
